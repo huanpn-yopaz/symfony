@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+{% block title %}
+    Post
+{% endblock %}
+{% block body %}
+    <h2>Post</h2>
+    {% for message in app.flashes('message') %}
+        <div class="alert alert-success">{{message}}</div>
+    {% endfor %}
+    <a class="btn btn-success" href="{{path('create_post')}}">Add</a>
+    <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">title</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  {% for post in posts %}
+    <tr>
+      <th>{{post.id}}</th>
+      <td>{{post.name}}</td>
+      <td>{{post.title}}</td>
+      <td>
+      <a href="{{path('edit_post',{id:post.id})}}" class="btn btn-info">Edit</a>
+       <a onclick="return confirmation(event);" href="{{path('delete_post',{id:post.id})}}" class="btn btn-danger">Delete</a>
+      </td>
+    </tr>
+  {% endfor %}
+  </tbody>
+</table>
+    
+{% endblock %}
